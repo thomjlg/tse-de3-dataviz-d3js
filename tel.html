@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<title>Smoothed D3.js Radar Chart</title>
+
+		<!-- Google fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+		<!-- D3.js -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+		
+		<style>		
+			.legend {
+				font-family: 'Raleway', sans-serif;
+				fill: #333333;
+			}
+			
+			.tooltip {
+				fill: #333333;
+			}
+		</style>
+
+		<link rel="stylesheet" href="styles.css" />
+
+	</head>
+	<body>
+
+		<header>
+			DE3 - Dataviz - Thomas JAULGEY
+		  </header>
+		  
+		  <nav>
+			<ul>
+			  <a href="index.html"><li>Energie & Voltage</li></a>
+			  <a href="tel.html"><li>Utilisation Telephone</li></a>
+			</ul>
+		  </nav>
+
+		  <span style="color:#00A0B0">bleu -- </span>: nb d'heures de sommeil<br />
+		  <span style="color:#EDC951">jaune -- </span>: nb d'heures passées sur le téléphone<br />
+		  <span style="color:#CC333F">rouge -- </span>: nb d'heures de sport<br />
+
+
+		<div class="radarChart"></div>
+
+		<script src="radarChart.js"></script>	
+		<script>
+      
+      /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
+      
+			////////////////////////////////////////////////////////////// 
+			//////////////////////// Set-Up ////////////////////////////// 
+			////////////////////////////////////////////////////////////// 
+			
+			var margin = {top: 100, right: 100, bottom: 100, left: 100},
+				width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+				height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+					
+			////////////////////////////////////////////////////////////// 
+			////////////////////////// Data ////////////////////////////// 
+			////////////////////////////////////////////////////////////// 
+
+			var data = [
+					  [
+                        {axis:"etudiant 1",value:4.17},
+                        {axis:"etudiant 2",value:3.27},
+                        {axis:"etudiant 3",value:2.54},
+                        {axis:"etudiant 4",value:5.18},
+                        {axis:"etudiant 5",value:3.58},
+                        {axis:"etudiant 6",value:6.02},
+                        {axis:"etudiant 7",value:9.27},
+                        {axis:"etudiant 8",value:5.51},
+                        {axis:"etudiant 9",value:1.25},
+                        {axis:"etudiant 10",value:5.4},
+                        {axis:"etudiant 11",value:4.06},
+                        {axis:"etudiant 12",value:2.4},
+                        {axis:"etudiant 13",value:5},
+                        {axis:"etudiant 14",value:2.2},
+                        {axis:"etudiant 15",value:3.46},
+                        {axis:"etudiant 16",value:3.5},
+                        {axis:"etudiant 17",value:0}
+                    ],
+
+                    [
+						{axis:'etudiant 1',value:1.33},
+						{axis:'etudiant 2',value:1.5},
+						{axis:'etudiant 3',value:2},
+						{axis:'etudiant 4',value:2},
+						{axis:'etudiant 5',value:1},
+						{axis:'etudiant 6',value:2.5},
+						{axis:'etudiant 7',value:0.3},
+						{axis:'etudiant 8',value:1.5},
+						{axis:'etudiant 9',value:0},
+						{axis:'etudiant 10',value:2},
+						{axis:'etudiant 11',value:0.5},
+						{axis:'etudiant 12',value:0.66},
+						{axis:'etudiant 13',value:0.5},
+						{axis:'etudiant 14',value:0.5},
+						{axis:'etudiant 15',value:1.33},
+						{axis:'etudiant 16',value:1},
+						{axis:'etudiant 17',value:0}
+                    ],
+
+                    [
+                        {axis:"etudiant 1",value:8},
+                        {axis:"etudiant 2",value:7.3},
+                        {axis:"etudiant 3",value:6},
+                        {axis:"etudiant 4",value:6.45},
+                        {axis:"etudiant 5",value:9},
+                        {axis:"etudiant 6",value:7.3},
+                        {axis:"etudiant 7",value:7.3},
+                        {axis:"etudiant 8",value:6.3},
+                        {axis:"etudiant 9",value:7},
+                        {axis:"etudiant 10",value:6.3},
+                        {axis:"etudiant 11",value:7.3},
+                        {axis:"etudiant 12",value:7},
+                        {axis:"etudiant 13",value:8},
+                        {axis:"etudiant 14",value:7.3},
+                        {axis:"etudiant 15",value:7},
+                        {axis:"etudiant 16",value:6},
+                        {axis:"etudiant 17",value:7}
+					  ]
+					];
+			////////////////////////////////////////////////////////////// 
+			//////////////////// Draw the Chart ////////////////////////// 
+			////////////////////////////////////////////////////////////// 
+
+			var color = d3.scale.ordinal()
+				.range(["#EDC951","#CC333F","#00A0B0"]);
+				
+			var radarChartOptions = {
+			  w: width,
+			  h: height,
+			  margin: margin,
+			  maxValue: 0.5,
+			  levels: 5,
+			  roundStrokes: true,
+			  color: color
+			};
+			//Call function to draw the Radar chart
+			RadarChart(".radarChart", data, radarChartOptions);
+
+
+
+			
+		</script>
+	</body>
+</html>
